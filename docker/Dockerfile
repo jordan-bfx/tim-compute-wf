@@ -6,6 +6,9 @@ FROM nanoporetech/dorado@sha256:832c995858ac5418f4357d87c31faf8259e4dba45201c782
 ARG MICROMAMBA_VERSION=2.10.0
 ENV MAMBA_ROOT_PREFIX=/opt/micromamba
 
+# The Dorado base image defaults to a non-root user; package installation needs root.
+USER root
+
 # procps provides `ps`, which Nextflow uses for task resource metrics.
 # Install bash as required by Nextflow's task wrapper.
 RUN env -u LD_LIBRARY_PATH apt-get update \
