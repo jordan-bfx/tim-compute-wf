@@ -8,8 +8,8 @@ ENV MAMBA_ROOT_PREFIX=/opt/micromamba
 
 # procps provides `ps`, which Nextflow uses for task resource metrics.
 # Install bash as required by Nextflow's task wrapper.
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends bash ca-certificates curl procps bzip2 \
+RUN env -u LD_LIBRARY_PATH apt-get update \
+    && env -u LD_LIBRARY_PATH apt-get install -y --no-install-recommends bash ca-certificates curl procps bzip2 \
     && rm -rf /var/lib/apt/lists/*
 
 # Install pinned samtools and modkit packages from Bioconda.
