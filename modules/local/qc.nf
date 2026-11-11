@@ -1,8 +1,8 @@
 process QC {
     tag "$meta.cleanName"
     label 'process_medium'
-    // samtools and modkit
-    container 'bioinformatics@sha256:4329213295a77248aa9600d80de603b005670438b580e9d0f24a6ec902b2a809'
+    // Combined local image: Dorado, samtools, and modkit.
+    container 'tim-compute-wf-tools:2026.11'
 
     input:
     tuple val(meta), path(aln_cram), path(crai)

@@ -1,8 +1,8 @@
 process PILEUP {
     tag "$meta.cleanName"
     label 'process_high'
-    // modkit
-    container 'bioinformatics@sha256:a41c475e46b9122e47cbaa10a3d0fd7d7206fe97a61677547f47a666cd97edc2'
+    // Combined local image: Dorado, samtools, and modkit.
+    container 'tim-compute-wf-tools:2026.11'
 
     input:
     tuple val(meta), path(aln_cram), path(crai)

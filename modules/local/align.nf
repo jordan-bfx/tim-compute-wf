@@ -1,8 +1,8 @@
 process ALIGN {
     tag "$meta.cleanName"
     label 'process_high'
-    // samtools_dorado 
-    container 'bioinformatics@sha256:31ddb7185903153f9895403a120ea07f08961bd1bf92d495b3e5e7154534c006'
+    // Combined local image: Dorado, samtools, and modkit.
+    container 'tim-compute-wf-tools:2026.11'
 
     input:
     tuple val(meta), path(input_bams)
