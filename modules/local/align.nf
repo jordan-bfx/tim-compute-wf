@@ -5,7 +5,7 @@ process ALIGN {
     container 'bioinformatics@sha256:31ddb7185903153f9895403a120ea07f08961bd1bf92d495b3e5e7154534c006'
 
     input:
-    tuple val(meta), path(input_bam)
+    tuple val(meta), path(input_bams)
     path ref_genome
 
     output:
@@ -14,9 +14,11 @@ process ALIGN {
 
     script:
     """
+    samtools merge -f -@ ${task.cpus} "${meta.cleanName}.merged.bam" ${input_bams}
+
     dorado aligner --threads ${task.cpus} -Y \\
         ${ref_genome} \\
-        ${input_bam} | \\
+        "${meta.cleanName}.merged.bam" | \\
     samtools sort -@ ${task.cpus} --reference ${ref_genome} -o \\
     "${meta.cleanName}.aln.sorted.cram"
 

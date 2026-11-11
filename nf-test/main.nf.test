@@ -3,11 +3,12 @@ nextflow_pipeline {
     name "renew-methylome"
     script "../main.nf"
 
-    test("single local bam") {
+    test("align from bam directory") {
 
         when {
             params {
-                input_bam  = "${projectDir}/nf-test/data/test.bam"
+                input_dir  = "${projectDir}/nf-test/data"
+                clean_name = "test"
                 ref_genome = "${projectDir}/nf-test/data/hg38.fa"
                 outdir     = "$outputDir"
             }

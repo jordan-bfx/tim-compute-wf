@@ -7,10 +7,13 @@ workflow {
     main:
     ch_versions = Channel.empty()
 
-    input_bam = file(params.input_bam, checkIfExists: true)
-    ch_sample = Channel.of(tuple([cleanName: input_bam.simpleName], input_bam))
+    input_dir = file(params.input_dir, checkIfExists: true)
+    ch_bams = Channel.fromPath("${input_dir}/*.bam", checkIfExists: true)
+        .ifEmpty { error "No BAM files found in input directory: ${input_dir}" }
+        .collect()
+        .map { input_bams -> tuple([cleanName: params.clean_name], input_bams) }
 
-    ALIGN(ch_sample, params.ref_genome)
+    ALIGN(ch_bams, params.ref_genome)
     ch_versions = ch_versions.mix(ALIGN.out.versions)
 
     PILEUP(ALIGN.out.aligned_cram, params.ref_genome)
