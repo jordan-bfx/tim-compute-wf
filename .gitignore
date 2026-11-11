@@ -1,0 +1,9 @@
+.nextflow*
+work/
+results/
+.nf-test/
+.nf-test.log
+nf-test/data/hg38.fa
+nf-test/data/hg38.fa.fai
+!nf-test/data/.gitkeep
+nf-test.jar

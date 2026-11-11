@@ -1,0 +1,13 @@
+{
+    "single local bam": {
+        "content": [
+            "test.bed.gz:md5,2f32b4cf429293cd54c0a44f5ce60fcb",
+            "test.stats.json:md5,c042a44a76467321140803f34501028e"
+        ],
+        "timestamp": "2026-10-12T11:43:35.063054743",
+        "meta": {
+            "nf-test": "0.9.5",
+            "nextflow": "26.04.6"
+        }
+    }
+}

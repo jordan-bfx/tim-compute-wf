@@ -1,0 +1,25 @@
+nextflow_pipeline {
+
+    name "renew-methylome"
+    script "../main.nf"
+
+    test("single local bam") {
+
+        when {
+            params {
+                input_bam  = "${projectDir}/nf-test/data/test.bam"
+                ref_genome = "${projectDir}/nf-test/data/hg38.fa"
+                outdir     = "$outputDir"
+            }
+        }
+
+        then {
+            assert workflow.success
+            // CRAM is left out: its header records the command line and paths
+            assert snapshot(
+                path("$outputDir/PILEUP/test.bed.gz"),
+                path("$outputDir/QC/test.stats.json")
+            ).match()
+        }
+    }
+}
