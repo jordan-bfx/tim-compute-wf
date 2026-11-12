@@ -16,7 +16,7 @@ process ALIGN {
     """
     samtools merge -f -@ ${task.cpus} "${meta.cleanName}.merged.bam" ${input_bams}
 
-    dorado aligner --threads ${task.cpus} -Y \\
+    dorado aligner --threads ${task.cpus} --mm2-opts "-Y" \\
         ${ref_genome} \\
         "${meta.cleanName}.merged.bam" | \\
     samtools sort -@ ${task.cpus} --reference ${ref_genome} -o \\
